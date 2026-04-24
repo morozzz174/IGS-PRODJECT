@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ИЖС-Проектировщик</string>
+
+    <string name="project_name_hint">Название проекта</string>
+    <string name="project_description_hint">Описание проекта</string>
+    <string name="create_project">Создать проект</string>
+    <string name="save_project">Сохранить проект</string>
+    <string name="delete_project">Удалить проект</string>
+    <string name="export_project">Экспорт проекта</string>
+    <string name="my_projects">Мои проекты</string>
+
+    <string name="plot_width">Ширина участка, м</string>
+    <string name="plot_length">Длина участка, м</string>
+    <string name="plot_area">Площадь участка, сот.</string>
+    <string name="plot_slope">Уклон участка, %</string>
+
+    <string name="house_width">Ширина дома, м</string>
+    <string name="house_length">Длина дома, м</string>
+    <string name="floors_count">Этажность</string>
+    <string name="floor_height">Высота этажа, м</string>
+    <string name="roof_type">Тип кровли</string>
+    <string name="foundation_type">Тип фундамента</string>
+    <string name="wall_material">Материал стен</string>
+    <string name="roof_material">Кровельный материал</string>
+
+    <string name="floor_1">Первый этаж</string>
+    <string name="floor_2">Второй этаж</string>
+    <string name="floor_3">Третий этаж</string>
+    <string name="floor_attic">Мансарда</string>
+
+    <string name="kitchen">Кухня</string>
+    <string name="living_room">Гостиная</string>
+    <string name="bedroom">Спальня</string>
+    <string name="bathroom">Ванная</string>
+    <string name="toilet">Туалет</string>
+    <string name="hallway">Прихожая</string>
+    <string name="corridor">Коридор</string>
+    <string name="closet">Кладовая</string>
+    <string name="garage">Гараж</string>
+    <string name="boiler_room">Котельная</string>
+    <string name="utility_room">Хозяйственная комната</string>
+
+    <string name="type_roof_flat">Плоская</string>
+    <string name="type_roof_gabled">Двускатная</string>
+    <string name="type_roof_hipped">Вальмовая</string>
+    <string name="type_roof_mansard">Мансардная</string>
+
+    <string name="type_foundation_strip">Ленточный</string>
+    <string name="type_foundation_tile">Плитный</string>
+    <string name="type_foundation_column">Столбчатый</string>
+    <string name="type_foundation_screw">Винтовые сваи</string>
+
+    <string name="material_wall_brick">Кирпич</string>
+    <string name="material_wall_block">Пеноблок</string>
+    <string name="material_wall_gas">Газобетон</string>
+    <string name="material_wall_wood">Дерево</string>
+    <string name="material_wall_frame">Каркасный</string>
+
+    <string name="ai_agent_chat">ИИ-консультант</string>
+    <string name="ai_planner">Планировщик</string>
+    <string name="ai_calculator">Калькулятор</string>
+    <string name="ai_codes_checker">Нормоконтроль</string>
+    <string name="ai_chat_hint">З��дайте вопрос по проектированию ИЖС…</string>
+    <string name="ai_send_message">Отправить</string>
+    <string name="ai_clear_history">Очистить историю</string>
+    <string name="ai_daily_limit">Дневной лимит сообщений: %1$d/%2$d</string>
+    <string name="ai_premium_required">Для безлимитного доступа к ИИ оформите Премиум</string>
+
+    <string name="generate_2d_plan">Сгенерировать план</string>
+    <string name="view_3d_model">3D-просмотр</string>
+    <string name="calculate_materials">Рассчитать материалы</string>
+    <string name="make估算">Смета</string>
+
+    <string name="export_pdf">Экспорт в PDF</string>
+    <string name="export_obj">Экспорт в OBJ</string>
+    <string name="export_glb">Экспорт в GLB</string>
+    <string name="export_success">Экспорт успешно завершён</string>
+    <string name="export_error">Ошибка экспорта</string>
+
+    <string name="premium_title">Премиум</string>
+    <string name="premium_subtitle">Безлимитный ИИ и расширенные функции</string>
+    <string name="premium_buy">Купить</string>
+    <string name="premium_active">Активен</string>
+    <string name="premium_purchase_title">Приобретение Премиум</string>
+    <string name="premium_purchase_desc">Разблокируйте безлимитный ИИ-консультант, все шаблоны и экспорт без водяного знака</string>
+    <string name="premium_purchase_button">Купить за 399 ₽</string>
+    <string name="premium_restore">Восстановить покупки</string>
+    <string name="premium_purchased">Премиум активирован</string>
+    <string name="premium_error">Ошибка покупки</string>
+
+    <string name="settings">Настройки</string>
+    <string name="settings_theme">Тема приложения</string>
+    <string name="settings_theme_light">Светлая</string>
+    <string name="settings_theme_dark">Тёмная</string>
+    <string name="settings_theme_system">Системная</string>
+    <string name="settings_about">О приложении</string>
+    <string name="settings_privacy_policy">Политика конфиденциальности</string>
+    <string name="settings_version">Версия</string>
+
+    <string name="disclaimer_title">Важное предупреждение</string>
+    <string name="disclaimer_text">Приложение «ИЖС-Проектировщик» предназначено для предварительного планирования индивидуального жилого строительства. Результаты расчётов и чертежи являются справочными и не заменяют официальную проектную документацию, разработанную лицензированной проектной организацией.\n\nДля строительства необходимо получить разрешение на строительство (разрешение на строительство ИЖС) и утверждённый проект у архитектора.\n\nАвторы приложения не несут ответственности за использование результатов расчётов в реальном строительстве без согласования с квалифицированными специалистами.</string>
+    <string name="disclaimer_accept">Принимаю</string>
+    <string name="disclaimer_decline">Не принимаю</string>
+
+    <string name="validation_error">Ошибка валидации</string>
+    <string name="validation_required">Обязательное поле</string>
+    <string name="validation_min_value">Минимальное значение: %1$s</string>
+    <string name="validation_max_value">Максимальное значение: %1$s</string>
+
+    <string name="error_generic">Произошла ошибка. Попробуйте позже.</string>
+    <string name="error_no_projects">Нет сохранённых проектов</string>
+    <string name="error_create_first_project">Создайте свой первый проект</string>
+
+    <string name="loading">Загрузка…</string>
+    <string name="loading_model">Загрузка ИИ-модели…</string>
+    <string name="loading_scene">Загрузка 3D-модели…</string>
+
+    <string name="action_cancel">Отмена</string>
+    <string name="action_ok">ОК</string>
+    <string name="action_save">Сохранить</string>
+    <string name="action_delete">Удалить</string>
+    <string name="action_edit">Редактировать</string>
+    <string name="action_share">Поделиться</string>
+    <string name="action_back">Назад</string>
+    <string name="action_next">Далее</string>
+    <string name="action_finish">Готово</string>
+
+    <string name="room_area">Площадь: %1$.1f м²</string>
+    <string name="room_dimension">Размер: %1$.1f × %2$.1f м</string>
+    <string name="house_total_area">Общая площадь: %1$.1f м²</string>
+    <string name="house_living_area">Жилая площадь: %1$.1f м²</string>
+
+    <string name="material_volume">Объём: %1$.1f м³</string>
+    <string name="material_area">Площадь: %1$.1f м²</string>
+    <string name="material_count">Количество: %1$d шт.</string>
+    <string name="material_weight">Вес: %1$.1f кг</string>
+    <string name="estimated_cost">Примерная стоимость: %1$d ₽</string>
+
+    <string name="code_check_pass">Соответствует нормам</string>
+    <string name="code_check_warning">Требует проверки</string>
+    <string name="code_check_error">Не соответствует нормам</string>
+    <string name="code_check_require_architect">Требуется согласование с архитектором</string>
+</resources>
