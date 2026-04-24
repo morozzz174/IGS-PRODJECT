@@ -2,33 +2,115 @@ package ru.company.izhs_planner.ai
 
 import android.content.Context
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.withContext
 import ru.company.izhs_planner.ai.agents.CalculatorAgent
 import ru.company.izhs_planner.ai.agents.CodesCheckerAgent
 import ru.company.izhs_planner.ai.agents.PlannerAgent
 import ru.company.izhs_planner.domain.model.chat.*
-import java.io.BufferedReader
-import java.io.InputStreamReader
+import java.io.File
+import java.io.FileOutputStream
+import java.net.URL
+import java.net.HttpURLConnection
 
 class AIManager(private val context: Context) {
     private var isModelLoaded = false
+    private var isModelDownloaded = false
     private val plannerAgent = PlannerAgent()
     private val calculatorAgent = CalculatorAgent()
     private val codesCheckerAgent = CodesCheckerAgent()
 
+    private val _downloadProgress = MutableStateFlow(0f)
+    val downloadProgress: StateFlow<Float> = _downloadProgress
+
+    private val _downloadState = MutableStateFlow(DownloadState.NOT_STARTED)
+    val downloadState: StateFlow<DownloadState> = _downloadState
+
     suspend fun initialize(): Boolean = withContext(Dispatchers.IO) {
         try {
-            val modelFile = context.assets.open("models/qwen2.5-3b-instruct-q4_0.bin")
-            modelFile.close()
-            isModelLoaded = true
+            val modelDir = File(context.filesDir, "models")
+            val modelFile = File(modelDir, "qwen2.5-3b-instruct-q4_0.bin")
+            
+            if (modelFile.exists() && modelFile.length() > 1_000_000_000L) {
+                isModelDownloaded = true
+                isModelLoaded = true
+                _downloadState.value = DownloadState.COMPLETED
+                _downloadProgress.value = 1f
+            } else {
+                isModelDownloaded = false
+                _downloadState.value = DownloadState.NOT_STARTED
+            }
             true
         } catch (e: Exception) {
             isModelLoaded = false
+            isModelDownloaded = false
+            _downloadState.value = DownloadState.NOT_STARTED
             true
         }
     }
 
     fun isReady(): Boolean = isModelLoaded
+
+    fun isDownloaded(): Boolean = isModelDownloaded
+
+    suspend fun downloadModel(): Boolean = withContext(Dispatchers.IO) {
+        _downloadState.value = DownloadState.DOWNLOADING
+        
+        try {
+            val modelDir = File(context.filesDir, "models")
+            if (!modelDir.exists()) {
+                modelDir.mkdirs()
+            }
+            
+            val modelFile = File(modelDir, "qwen2.5-3b-instruct-q4_0.bin")
+            
+            val modelUrl = MODEL_DOWNLOAD_URL
+            
+            val url = URL(modelUrl)
+            val connection = url.openConnection() as HttpURLConnection
+            connection.requestMethod = "GET"
+            connection.connectTimeout = 15000
+            connection.readTimeout = 30000
+            
+            val totalBytes = connection.contentLength.toLong()
+            
+            connection.inputStream.use { input ->
+                FileOutputStream(modelFile).use { output ->
+                    val buffer = ByteArray(8192)
+                    var downloadedBytes = 0L
+                    var bytesRead: Int
+                    
+                    while (input.read(buffer).also { bytesRead = it } != -1) {
+                        output.write(buffer, 0, bytesRead)
+                        downloadedBytes += bytesRead
+                        
+                        if (totalBytes > 0) {
+                            _downloadProgress.value = downloadedBytes.toFloat() / totalBytes
+                        }
+                    }
+                }
+            }
+            
+            connection.disconnect()
+            
+            if (modelFile.exists() && modelFile.length() > 1_000_000_000L) {
+                isModelDownloaded = true
+                isModelLoaded = true
+                _downloadState.value = DownloadState.COMPLETED
+                _downloadProgress.value = 1f
+                true
+            } else {
+                modelFile.delete()
+                _downloadState.value = DownloadState.FAILED
+                false
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            _downloadState.value = DownloadState.FAILED
+            false
+        }
+    }
 
     fun getAgents(): List<AgentType> = AgentType.entries
 
@@ -73,7 +155,7 @@ class AIManager(private val context: Context) {
             - Санузлы не должны примыкать к кухне и жилым комнатам (по санправилам)
             - Вход в санузел — из коридора или прихожей
             
-            Не давай рекомендаций, требующих лицензирова��ного проектирования.
+            Не давай рекомендаций, требующих лицензированного проектирования.
             Предупреждай о необходимости проверки у архитектора.
             Отвечай кратко и по существу на русском языке.
         """.trimIndent()
@@ -99,7 +181,7 @@ class AIManager(private val context: Context) {
             - Утеплитель: ~1500 ₽/м³
             
             Всегда указывай, что смета ориентировочная и требует уточнения.
-            Приводи具体的 цифры с обоснованием.
+            Приводи конкретные цифры с обоснованием.
             Отвечай на русском языке.
         """.trimIndent()
 
@@ -150,9 +232,23 @@ class AIManager(private val context: Context) {
             
             |Текущий вопрос: $userMessage
             
-            |Ответ:
+            |От��ет:
         """.trimMargin()
     }
 
     fun getMaxContextTokens(): Int = 4096
+
+    fun getModelSizeMB(): Long = 1800
+
+    companion object {
+        const val MODEL_DOWNLOAD_URL = "https://huggingface.co/Qwen/Qwen2.5-3B-Instruct-GGUF/resolve/main/qwen2.5-3b-instruct-q4_0.bin"
+    }
+}
+
+enum class DownloadState {
+    NOT_STARTED,
+    DOWNLOADING,
+    COMPLETED,
+    FAILED,
+    SKIPPED
 }

@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.collectLatest
 import ru.company.izhs_planner.MainViewModel
 import ru.company.izhs_planner.R
 import ru.company.izhs_planner.domain.model.chat.*
+import ru.company.izhs_planner.ai.DownloadState
 import ru.company.izhs_planner.premium.PremiumManager
 
 @OptIn(ExperimentalMaterial3Api::class)

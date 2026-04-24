@@ -14,6 +14,7 @@ import ru.company.izhs_planner.domain.model.*
 import ru.company.izhs_planner.mobile_ads.MobileAdsManager
 import ru.company.izhs_planner.premium.PremiumManagerImpl
 import ru.company.izhs_planner.ai.AIManager
+import ru.company.izhs_planner.ai.DownloadState
 import ru.company.izhs_planner.generator3d.ParametricGenerator
 import ru.company.izhs_planner.export.ExportService
 
@@ -69,6 +70,10 @@ class MainViewModel(
     private val _codeCheckResults = MutableStateFlow<List<CodeCheckResult>>(emptyList())
     val codeCheckResults: StateFlow<List<CodeCheckResult>> = _codeCheckResults
     
+    val aiDownloadState = aiManager.downloadState
+    val aiDownloadProgress = aiManager.downloadProgress
+    val isAiDownloaded = MutableStateFlow(false)
+    
     init {
         viewModelScope.launch {
             adsManager.initialize()
@@ -79,6 +84,16 @@ class MainViewModel(
     private fun loadDailyLimit() {
         viewModelScope.launch {
             premiumManager.checkPremiumStatus()
+            val downloaded = aiManager.isDownloaded()
+            isAiDownloaded.value = downloaded
+        }
+    }
+    
+    fun downloadAiModel() {
+        viewModelScope.launch {
+            isAiDownloaded.value = false
+            val success = aiManager.downloadModel()
+            isAiDownloaded.value = success
         }
     }
     

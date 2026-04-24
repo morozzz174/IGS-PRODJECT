@@ -141,4 +141,16 @@
     <string name="code_check_warning">Требует проверки</string>
     <string name="code_check_error">Не соответствует нормам</string>
     <string name="code_check_require_architect">Требуется согласование с архитектором</string>
+<!-- AI Download Strings -->
+    <string name="ai_download_title">Загрузка ИИ-модели</string>
+    <string name="ai_download_desc">Для работы ИИ-консультанта требуется загрузить модель (${1.8} ГБ)</string>
+    <string name="ai_download_button">Загрузить ИИ-модель</string>
+    <string name="ai_download_skip">Пропустить</string>
+    <string name="ai_download_progress">${1}%% загружено</string>
+    <string name="ai_download_wait">Пожалуйста, дождитесь завершения загрузки…</string>
+    <string name="ai_download_success">ИИ-модель загружена!</string>
+    <string name="ai_download_failed">Не удалось загрузить модель</string>
+    <string name="ai_download_retry">Повторить</string>
+    <string name="ai_use_without">Продолжить без ИИ</string>
+
 </resources>
