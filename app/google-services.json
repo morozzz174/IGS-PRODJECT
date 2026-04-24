@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "123456789012",
+    "project_id": "izhs-planner",
+    "storage_bucket": "izhs-planner.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:123456789012:android:abc123def456",
+        "android_client_info": {
+          "package_name": "ru.company.izhs_planner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "123456789012-abc123def456ghi789jkl012.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABC123def456GHI789jkl012MNO345PQR678STU901vw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "123456789012-abc123def456ghi789jkl012.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

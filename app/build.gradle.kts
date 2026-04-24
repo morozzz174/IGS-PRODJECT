@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.android")
     id("com.google.devtools.ksp")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -105,6 +106,16 @@ dependencies {
     implementation("com.github.nickagas:filament-android:1.51.0")
 
     implementation("com.google.code.gson:gson:2.10.1")
+
+    // Firebase
+    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.firebase:firebase-firestore-ktx")
+    implementation("com.google.firebase:firebase-database-ktx")
+    implementation("com.google.firebase:firebase-storage-ktx")
+
+    // Play Services Auth (для Google Sign-In)
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
