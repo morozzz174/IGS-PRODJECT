@@ -63,6 +63,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             val themeMode by viewModel.themeMode.collectAsState()
             val isDarkTheme by viewModel.isDarkTheme.collectAsState()
+            val isAiDownloaded by viewModel.isAiDownloaded.collectAsState()
+            val aiDownloadState by viewModel.aiDownloadState.collectAsState()
+            val aiDownloadProgress by viewModel.aiDownloadProgress.collectAsState()
             
             IzhsPlannerTheme(
                 darkTheme = isDarkTheme,
@@ -78,6 +81,14 @@ class MainActivity : ComponentActivity() {
                     DisclaimerDialog(
                         onAccept = { viewModel.acceptDisclaimer() },
                         onDecline = { finish() }
+                    )
+                } else if (!isAiDownloaded && aiDownloadState == ru.company.izhs_planner.ai.DownloadState.NOT_STARTED) {
+                    AiDownloadPrompt(
+                        downloadState = aiDownloadState,
+                        progress = aiDownloadProgress,
+                        isDownloaded = isAiDownloaded,
+                        onDownload = { viewModel.downloadAiModel() },
+                        onSkip = { }
                     )
                 } else {
                     MainScreen(

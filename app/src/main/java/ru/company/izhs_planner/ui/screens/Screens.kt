@@ -2,6 +2,10 @@ package ru.company.izhs_planner.ui.screens
 
 import android.widget.FrameLayout
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
@@ -461,9 +465,12 @@ fun ParamsScreen(viewModel: MainViewModel) {
             var selectedFoundation by remember { mutableStateOf(FoundationType.STRIP) }
             var selectedWall by remember { mutableStateOf(WallMaterial.GAS_BLOCK) }
             
-            ExposedDropdownMenuBox(
-                expanded = false,
-                onExpandedChange = { }
+            Text(
+                text = "Тип кровли",
+                style = MaterialTheme.typography.bodyMedium
+            )
+            FlowRow(
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 RoofType.entries.forEach { roof ->
                     FilterChip(
@@ -477,20 +484,47 @@ fun ParamsScreen(viewModel: MainViewModel) {
                 }
             }
             
-            Text(
-                text = "Тип кровли: ${selectedRoof.name.lowercase().replaceFirstChar { it.uppercase() }}",
-                style = MaterialTheme.typography.bodyMedium
-            )
+            Spacer(modifier = Modifier.height(8.dp))
             
             Text(
-                text = "Фундамент: ${selectedFoundation.name.lowercase().replaceFirstChar { it.uppercase() }}",
+                text = "Фундамент",
                 style = MaterialTheme.typography.bodyMedium
             )
+            FlowRow(
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                FoundationType.entries.forEach { foundation ->
+                    FilterChip(
+                        selected = selectedFoundation == foundation,
+                        onClick = { 
+                            selectedFoundation = foundation
+                            viewModel.setFoundationType(foundation)
+                        },
+                        label = { Text(foundation.name.lowercase().replaceFirstChar { it.uppercase() }) }
+                    )
+                }
+            }
+            
+            Spacer(modifier = Modifier.height(8.dp))
             
             Text(
-                text = "Стены: ${selectedWall.displayName}",
+                text = "Материал стен",
                 style = MaterialTheme.typography.bodyMedium
             )
+            FlowRow(
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                WallMaterial.entries.forEach { wall ->
+                    FilterChip(
+                        selected = selectedWall == wall,
+                        onClick = { 
+                            selectedWall = wall
+                            viewModel.setWallMaterial(wall)
+                        },
+                        label = { Text(wall.displayName) }
+                    )
+                }
+            }
             
             HorizontalDivider()
             
@@ -660,8 +694,8 @@ fun SettingsScreen(
                 .padding(16.dp)
         ) {
             Text("Тема", style = MaterialTheme.typography.titleMedium)
-            Row(
-                modifier = Modifier.fillMaxWidth(),
+            
+            FlowRow(
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 ThemeMode.entries.forEach { mode ->
