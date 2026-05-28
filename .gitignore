@@ -9,4 +9,7 @@ local.properties
 *.jks
 keystore.properties
 app/build
+app/.cxx
 app/src/main/cpp/llama.cpp/build
+ios/**/build
+ios/**/.gradle

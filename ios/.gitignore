@@ -1,0 +1,15 @@
+*.iml
+.gradle
+.idea
+build
+captures
+local.properties
+xcuserdata
+*.xcworkspace/xcuserdata
+DerivedData
+Pods
+*.app
+*.dSYM
+*.framework
+*.xcframework
+composeApp/build
