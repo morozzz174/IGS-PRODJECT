@@ -1,0 +1,12 @@
+*.iml
+.gradle
+.idea
+.DS_Store
+build
+captures
+local.properties
+*.keystore
+*.jks
+keystore.properties
+app/build
+app/src/main/cpp/llama.cpp/build
